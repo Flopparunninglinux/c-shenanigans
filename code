@@ -1,24 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main ()
 
-{
-    bool primeNumber[n + 1];
-    memset(primeNumber, true, sizeof(primeNumber));
-    for (int j = 2; j * j <= n; j++) {
-        if (primeNumber[j] == true) {
-            for (int k = j * j; k <= n; k += j)
-                primeNumber[k] = false;
+vector<int> sieve(int n) {
+    
+   
+    vector<bool> prime(n + 1, true);
+    for (int p = 2; p * p <= n; p++) {
+        if (prime[p] == true) {
+            
+           
+            for (int i = p * p; i <= n; i += p)
+                prime[i] = false;
         }
-    } 
-    for (int i = 2; i <= n; i++)
-        if (primeNumber[i])
-            cout << i << " ";
+    }
+    
+    vector<int> res;
+    for (int p = 2; p <= n; p++){
+        if (prime[p]){ 
+            res.push_back(p);
+        }
+    }
+    return res;
 }
-int main()
-{
-    int n = 25;
-    Sieve_Of_Eratosthenes(n);
+
+int main(){
+    int n = 35;
+    vector<int> res = sieve(n);
+    for(auto ele : res){
+        cout << ele << ' ';
+    }
     return 0;
-} 
-//credits to profu de info si indienii de pe youtube
+}
